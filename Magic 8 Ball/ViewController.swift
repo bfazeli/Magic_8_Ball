@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     // Array to hold all the different ball images
-    var ballArray : [String] = ["ball1", "ball2", "ball3", "ball4", "ball5"]
+    let ballArray : [String] = ["ball1", "ball2", "ball3", "ball4", "ball5"]
     
     var randomBallNumber : Int = 0
     
@@ -21,9 +21,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        randomBallNumber = Int(arc4random_uniform(4))
-        imageView.image = UIImage(named: ballArray[randomBallNumber])
+        newBallImage()
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,8 +30,16 @@ class ViewController: UIViewController {
     }
 
     @IBAction func askButtonPressed(_ sender: Any) {
-        
+        newBallImage()
     }
     
+    func newBallImage() {
+        randomBallNumber = Int(arc4random_uniform(4))
+        imageView.image = UIImage(named: ballArray[randomBallNumber])
+    }
+    
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        newBallImage()
+    }
 }
 
